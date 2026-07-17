@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
       { title: "GoldRatesToday.in — Live Gold & Silver Prices in India" },
       { name: "description", content: "Live 24K, 22K & 18K gold prices, silver rates, city-wise data, and premium calculators — updated every minute." },
       { property: "og:title", content: "GoldRatesToday.in — Live Gold & Silver Prices in India" },
-      { property: "og:description", content: "Live bullion rates, city-wise gold prices and calculators for India." },
+      { property: "og:description", content: "Live 24K, 22K & 18K gold prices, silver rates, city-wise data, and premium calculators — updated every minute." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
