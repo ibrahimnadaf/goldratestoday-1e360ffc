@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PricesRouteImport } from './routes/prices'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CityCityRouteImport } from './routes/city.$city'
 
 const PricesRoute = PricesRouteImport.update({
   id: '/prices',
@@ -28,35 +29,44 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CityCityRoute = CityCityRouteImport.update({
+  id: '/city/$city',
+  path: '/city/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/prices': typeof PricesRoute
+  '/city/$city': typeof CityCityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/prices': typeof PricesRoute
+  '/city/$city': typeof CityCityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/prices': typeof PricesRoute
+  '/city/$city': typeof CityCityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calculator' | '/prices'
+  fullPaths: '/' | '/calculator' | '/prices' | '/city/$city'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calculator' | '/prices'
-  id: '__root__' | '/' | '/calculator' | '/prices'
+  to: '/' | '/calculator' | '/prices' | '/city/$city'
+  id: '__root__' | '/' | '/calculator' | '/prices' | '/city/$city'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculatorRoute: typeof CalculatorRoute
   PricesRoute: typeof PricesRoute
+  CityCityRoute: typeof CityCityRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/city/$city': {
+      id: '/city/$city'
+      path: '/city/$city'
+      fullPath: '/city/$city'
+      preLoaderRoute: typeof CityCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorRoute: CalculatorRoute,
   PricesRoute: PricesRoute,
+  CityCityRoute: CityCityRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
