@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PricesRouteImport } from './routes/prices'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CityCityRouteImport } from './routes/city.$city'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricesRoute = PricesRouteImport.update({
   id: '/prices',
   path: '/prices',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/prices': typeof PricesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/city/$city': typeof CityCityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/prices': typeof PricesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/city/$city': typeof CityCityRoute
 }
 export interface FileRoutesById {
@@ -52,25 +60,40 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/prices': typeof PricesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/city/$city': typeof CityCityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calculator' | '/prices' | '/city/$city'
+  fullPaths: '/' | '/calculator' | '/prices' | '/sitemap.xml' | '/city/$city'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calculator' | '/prices' | '/city/$city'
-  id: '__root__' | '/' | '/calculator' | '/prices' | '/city/$city'
+  to: '/' | '/calculator' | '/prices' | '/sitemap.xml' | '/city/$city'
+  id:
+    | '__root__'
+    | '/'
+    | '/calculator'
+    | '/prices'
+    | '/sitemap.xml'
+    | '/city/$city'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculatorRoute: typeof CalculatorRoute
   PricesRoute: typeof PricesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CityCityRoute: typeof CityCityRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/prices': {
       id: '/prices'
       path: '/prices'
@@ -106,6 +129,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorRoute: CalculatorRoute,
   PricesRoute: PricesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   CityCityRoute: CityCityRoute,
 }
 export const routeTree = rootRouteImport
