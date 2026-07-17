@@ -1,0 +1,14 @@
+# GoldRatesToday.in
+
+> India's premium destination for live gold, silver and bullion prices with calculators and city-wise rates.
+
+## Pages
+- [Home](/): Live gold and silver prices with city explorer and tools.
+- [Live Prices](/prices): 24K, 22K, 18K gold and silver rates per gram in INR, updated every minute.
+- [Gold Calculator](/calculator): Calculate jewellery price with live rate, making charge and GST.
+
+## Cities
+- [Mumbai](/city/mumbai): Live gold rate in Mumbai.
+- [Delhi](/city/delhi): Live gold rate in Delhi.
+- [Bangalore](/city/bangalore): Live gold rate in Bangalore.
+- [Chennai](/city/chennai): Live gold rate in Chennai.
