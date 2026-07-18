@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricesRouteImport } from './routes/prices'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as CalculatorRouteImport } from './routes/calculator'
@@ -20,6 +21,11 @@ import { Route as CityCityRouteImport } from './routes/city.$city'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricesRoute = PricesRouteImport.update({
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/calculator': typeof CalculatorRoute
   '/disclaimer': typeof DisclaimerRoute
   '/prices': typeof PricesRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/city/$city': typeof CityCityRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/calculator': typeof CalculatorRoute
   '/disclaimer': typeof DisclaimerRoute
   '/prices': typeof PricesRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/city/$city': typeof CityCityRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/calculator': typeof CalculatorRoute
   '/disclaimer': typeof DisclaimerRoute
   '/prices': typeof PricesRoute
+  '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/city/$city': typeof CityCityRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/disclaimer'
     | '/prices'
+    | '/privacy'
     | '/sitemap.xml'
     | '/city/$city'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/disclaimer'
     | '/prices'
+    | '/privacy'
     | '/sitemap.xml'
     | '/city/$city'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/disclaimer'
     | '/prices'
+    | '/privacy'
     | '/sitemap.xml'
     | '/city/$city'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   DisclaimerRoute: typeof DisclaimerRoute
   PricesRoute: typeof PricesRoute
+  PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CityCityRoute: typeof CityCityRoute
 }
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/prices': {
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   DisclaimerRoute: DisclaimerRoute,
   PricesRoute: PricesRoute,
+  PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CityCityRoute: CityCityRoute,
 }
