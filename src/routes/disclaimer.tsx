@@ -1,14 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/disclaimer")({
-  component: Disclaimer,
+  component: About,
 });
 
-function Disclaimer() {
+function About() {
   return (
-    <main className="container mx-auto py-10">
-      <h1>Disclaimer</h1>
-      <p>Your disclaimer content goes here.</p>
-    </main>
+    <div className="mx-auto max-w-7xl px-4 md:px-8 py-16">
+      <h1 className="font-display text-5xl gold-shimmer">
+        About GoldRatesToday.in
+      </h1>
+
+      <p className="mt-6 text-muted-foreground text-lg">
+        GoldRatesToday.in provides live gold and silver prices,
+        city-wise rates, calculators, and market insights for India
+        and global markets.
+      </p>
+    </div>
   );
 }
