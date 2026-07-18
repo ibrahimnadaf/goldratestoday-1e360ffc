@@ -1,7 +1,18 @@
 import { Link } from "@tanstack/react-router";
-import { Coins } from "lucide-react";
+import { Coins, LogOut } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export function SiteHeader() {
+  const [email, setEmail] = useState<string | null>(null);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setEmail(data.session?.user.email ?? null));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setEmail(session?.user.email ?? null);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
   return (
     <header className="sticky top-0 z-40 border-b border-gold/10 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
@@ -14,10 +25,22 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
           <Link to="/prices" className="hover:text-foreground">Live Prices</Link>
           <Link to="/calculator" className="hover:text-foreground">Calculator</Link>
+          <Link to="/tools" className="hover:text-foreground">Tools</Link>
           <Link to="/about" className="hover:text-foreground">About</Link>
-          <Link to="/contact" className="hover:text-foreground">Contact</Link>
         </nav>
-        <Link to="/prices" className="btn-gold text-xs">Live rates</Link>
+        {email ? (
+          <div className="flex items-center gap-3">
+            <span className="hidden text-xs text-muted-foreground md:inline">{email}</span>
+            <button
+              onClick={async () => { await supabase.auth.signOut(); }}
+              className="btn-ghost-gold inline-flex items-center gap-1.5 text-xs"
+            >
+              <LogOut className="h-3.5 w-3.5" /> Sign out
+            </button>
+          </div>
+        ) : (
+          <Link to="/auth" className="btn-gold text-xs">Sign in</Link>
+        )}
       </div>
     </header>
   );
