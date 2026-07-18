@@ -14,16 +14,132 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      gold_rates_cache: {
+        Row: {
+          fetched_at: string
+          id: string
+          inr_per_gram_24k: number
+          symbol: string
+          usd_per_oz: number
+          usd_to_inr: number
+        }
+        Insert: {
+          fetched_at?: string
+          id?: string
+          inr_per_gram_24k: number
+          symbol: string
+          usd_per_oz: number
+          usd_to_inr: number
+        }
+        Update: {
+          fetched_at?: string
+          id?: string
+          inr_per_gram_24k?: number
+          symbol?: string
+          usd_per_oz?: number
+          usd_to_inr?: number
+        }
+        Relationships: []
+      }
+      price_alerts: {
+        Row: {
+          active: boolean
+          created_at: string
+          direction: string
+          id: string
+          metal: string
+          purity: string
+          threshold_inr_per_gram: number
+          triggered_at: string | null
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          direction: string
+          id?: string
+          metal: string
+          purity?: string
+          threshold_inr_per_gram: number
+          triggered_at?: string | null
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          direction?: string
+          id?: string
+          metal?: string
+          purity?: string
+          threshold_inr_per_gram?: number
+          triggered_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email_alerts: boolean
+          id: string
+          preferred_city: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email_alerts?: boolean
+          id: string
+          preferred_city?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email_alerts?: boolean
+          id?: string
+          preferred_city?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +266,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
