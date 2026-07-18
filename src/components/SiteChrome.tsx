@@ -54,8 +54,16 @@ export function SiteFooter() {
         </div>
         <FooterCol title="Market" links={[["Live Prices","/prices"],["Gold Calculator","/calculator"]]} />
         <FooterCol title="Cities" links={[["Mumbai","/city/mumbai"],["Delhi","/city/delhi"],["Bangalore","/city/bangalore"],["Chennai","/city/chennai"]]} />
-        <FooterCol title="Info" links={[["About","/about"],["Disclaimer","/disclaimer"]]} />
-      </div>
+        <FooterCol
+  title="Info"
+  links={[
+    ["About", "/about"],
+    ["Contact", "/contact"],
+    ["Privacy Policy", "/privacy"],
+    ["Disclaimer", "/disclaimer"],
+    ["Terms & Conditions", "/terms"],
+  ]}
+/>
       <div className="divider-gold" />
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-muted-foreground md:flex-row md:px-8">
         <span>© {new Date().getFullYear()} GoldRatesToday.in — Rates indicative; verify with your jeweller.</span>
