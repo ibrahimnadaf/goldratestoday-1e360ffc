@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricesRouteImport } from './routes/prices'
+import { Route as DmcaRouteImport } from './routes/dmca'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as CalculatorRouteImport } from './routes/calculator'
@@ -38,6 +39,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PricesRoute = PricesRouteImport.update({
   id: '/prices',
   path: '/prices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DmcaRoute = DmcaRouteImport.update({
+  id: '/dmca',
+  path: '/dmca',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DisclaimerRoute = DisclaimerRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/calculator': typeof CalculatorRoute
   '/cookies': typeof CookiesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/dmca': typeof DmcaRoute
   '/prices': typeof PricesRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/calculator': typeof CalculatorRoute
   '/cookies': typeof CookiesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/dmca': typeof DmcaRoute
   '/prices': typeof PricesRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/calculator': typeof CalculatorRoute
   '/cookies': typeof CookiesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/dmca': typeof DmcaRoute
   '/prices': typeof PricesRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/cookies'
     | '/disclaimer'
+    | '/dmca'
     | '/prices'
     | '/privacy'
     | '/sitemap.xml'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/cookies'
     | '/disclaimer'
+    | '/dmca'
     | '/prices'
     | '/privacy'
     | '/sitemap.xml'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/cookies'
     | '/disclaimer'
+    | '/dmca'
     | '/prices'
     | '/privacy'
     | '/sitemap.xml'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   CookiesRoute: typeof CookiesRoute
   DisclaimerRoute: typeof DisclaimerRoute
+  DmcaRoute: typeof DmcaRoute
   PricesRoute: typeof PricesRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -188,6 +201,13 @@ declare module '@tanstack/react-router' {
       path: '/prices'
       fullPath: '/prices'
       preLoaderRoute: typeof PricesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dmca': {
+      id: '/dmca'
+      path: '/dmca'
+      fullPath: '/dmca'
+      preLoaderRoute: typeof DmcaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/disclaimer': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   CookiesRoute: CookiesRoute,
   DisclaimerRoute: DisclaimerRoute,
+  DmcaRoute: DmcaRoute,
   PricesRoute: PricesRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
