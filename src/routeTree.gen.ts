@@ -17,6 +17,7 @@ import { Route as DmcaRouteImport } from './routes/dmca'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as CalculatorRouteImport } from './routes/calculator'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CityCityRouteImport } from './routes/city.$city'
@@ -61,6 +62,11 @@ const CalculatorRoute = CalculatorRouteImport.update({
   path: '/calculator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -80,6 +86,7 @@ const CityCityRoute = CityCityRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/calculator': typeof CalculatorRoute
   '/cookies': typeof CookiesRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/calculator': typeof CalculatorRoute
   '/cookies': typeof CookiesRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/calculator': typeof CalculatorRoute
   '/cookies': typeof CookiesRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/calculator'
     | '/cookies'
     | '/disclaimer'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/calculator'
     | '/cookies'
     | '/disclaimer'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/auth'
     | '/calculator'
     | '/cookies'
     | '/disclaimer'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   CalculatorRoute: typeof CalculatorRoute
   CookiesRoute: typeof CookiesRoute
   DisclaimerRoute: typeof DisclaimerRoute
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -258,6 +278,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   CalculatorRoute: CalculatorRoute,
   CookiesRoute: CookiesRoute,
   DisclaimerRoute: DisclaimerRoute,
