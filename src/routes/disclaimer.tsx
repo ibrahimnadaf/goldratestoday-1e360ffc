@@ -4,7 +4,7 @@ export const Route = createFileRoute("/disclaimer")({
   component: About,
 });
 
-function About() {
+function disclaimer() {
   return (
     <div className="mx-auto max-w-7xl px-4 md:px-8 py-16">
       <h1 className="font-display text-5xl gold-shimmer">
